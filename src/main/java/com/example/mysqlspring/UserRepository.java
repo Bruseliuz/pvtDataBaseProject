@@ -5,5 +5,5 @@ import sun.security.util.Password;
 import javax.validation.constraints.Email;
 
 public interface UserRepository extends CrudRepository<User, Integer>{
-    User findByEmailAndPassword(Email email, String password);
+    User findByEmailAndPassword(String email, String password);
 }

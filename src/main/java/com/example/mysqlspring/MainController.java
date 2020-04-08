@@ -35,9 +35,9 @@ public class MainController {
         return "Database Cleared";
     }
 
-//    @GetMapping(path="/password")
-//    public @ResponseBody User getUserFromPwdAndUsn(@RequestParam Email email, @RequestParam String password) {
-//        return userRepository.findByEmailAndPassword(email, password);
-//    }
+    @GetMapping(path="/getfromemailandpwd")
+    public @ResponseBody User getUserFromEmailAndPwd(@RequestParam String email, @RequestParam String password) {
+        return userRepository.findByEmailAndPassword(email, password);
+    }
 
 }
