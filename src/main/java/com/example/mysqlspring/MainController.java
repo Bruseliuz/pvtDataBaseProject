@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import javax.validation.constraints.Email;
+
 
 @Controller
 @RequestMapping(path="/mysqlspring")
@@ -15,9 +16,6 @@ public class MainController {
 
     @PostMapping(path="/add")
     public @ResponseBody String addNewUser (@RequestParam String name, @RequestParam String email, @RequestParam String password) {
-        if (name == null || email == null || password == null) {
-            return "Error in input";
-        }
         User n = new User();
         n.setName(name);
         n.setEmail(email);
@@ -31,8 +29,15 @@ public class MainController {
         return userRepository.findAll();
     }
 
+    @DeleteMapping(path="/deleteall")
+    public @ResponseBody String deleteAllUsers() {
+        userRepository.deleteAll();
+        return "Database Cleared";
+    }
+
 //    @GetMapping(path="/password")
-//    public @ResponseBody Optional<User> getUserFromPassword() {
-//        return userRepository.findById(1);
+//    public @ResponseBody User getUserFromPwdAndUsn(@RequestParam Email email, @RequestParam String password) {
+//        return userRepository.findByEmailAndPassword(email, password);
 //    }
+
 }
