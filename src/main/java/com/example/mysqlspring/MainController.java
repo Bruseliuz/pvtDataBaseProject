@@ -34,17 +34,27 @@ public class MainController {
     }
 
     @GetMapping(path="/findbyemail")
-    public @ResponseBody String getUserFromEmail(@RequestParam String email) {
+    public @ResponseBody String findUserFromEmail(@RequestParam String email) {
         User user = userRepository.findByEmail(email);
         if (user != null) {
-            return "No";
-        } else {
             return "Yes";
+        } else {
+            return "No";
         }
     }
 
-    @GetMapping(path="/getfromemailandpwd")
-    public @ResponseBody User getUserFromEmailAndPwd(@RequestParam String email, @RequestParam String password) {
-        return userRepository.findByEmailAndPassword(email, password);
+    @GetMapping(path="/getbyemail")
+    public @ResponseBody User getUserFromEmail(@RequestParam String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @GetMapping(path="/findbyemailandpwd")
+    public @ResponseBody String findUserFromEmailAndPwd(@RequestParam String email, @RequestParam String password) {
+        User user = userRepository.findByEmailAndPassword(email, password);
+        if (user != null) {
+            return "Yes";
+        } else {
+            return "No";
+        }
     }
 }
