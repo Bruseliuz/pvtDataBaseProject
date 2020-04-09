@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.Email;
-
 
 @Controller
 @RequestMapping(path="/mysqlspring")
@@ -33,6 +31,11 @@ public class MainController {
     public @ResponseBody String deleteAllUsers() {
         userRepository.deleteAll();
         return "Database Cleared";
+    }
+
+    @GetMapping(path="/findbyemail")
+    public @ResponseBody User getUserFromEmail(@RequestParam String email) {
+        return userRepository.findByEmail(email);
     }
 
     @GetMapping(path="/getfromemailandpwd")
